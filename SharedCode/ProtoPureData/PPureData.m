@@ -23,7 +23,6 @@
     if (delegate) self.delegate = delegate;
     [PdBase addToSearchPath:searchPath];
     self.patch = [PdFile openFileNamed:[patch lastPathComponent] path:[patch stringByDeletingLastPathComponent]];
-    NSLog(@"PPureData Open Patch: %@", self.patch);
     // close patch (this doesn't close the engine or path, just handle to file, its OK
     [self.patch closeFile];
     return self;
@@ -208,7 +207,6 @@
     if (isDealloced) return;
      // array check length
      int array1Len = [PdBase arraySizeForArrayNamed:arrayName];
-     NSLog(@"array1 len: %d", array1Len);
      // read array
      float array1[array1Len];
      [PdBase copyArrayNamed:arrayName withOffset:0 toArray:array1 count:array1Len];
@@ -222,7 +220,6 @@
     if (isDealloced) return;
     // array check length
     int array1Len = [PdBase arraySizeForArrayNamed:arrayName];
-    NSLog(@"array1 len: %d", array1Len);
     // read array
     float array1[array1Len];
     [PdBase copyArrayNamed:arrayName withOffset:offset toArray:array1 count:array1Len];
@@ -253,12 +250,12 @@
 {
     if (isDealloced) return;
     [self dspOff];
-    [PdBase setDelegate:nil]; // clear delegate & stop polling timer
+    [PdBase setDelegate:nil];
     [PdBase setMidiDelegate:nil];
     self.delegate = nil;
     isDealloced = TRUE;
-    [self.patch dealloc];
-    [self.audioController dealloc];
+    self.patch = nil;
+    self.audioController = nil;
 }
 -(void)dealloc
 {
