@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)sendMidiByte:(int)midiByte byte:(int)byte;
 -(void)sendSysex:(int)sysex byte:(int)byte;
 -(void)sendSysRealTime:(int)sysRealTime byte:(int)byte;
-/// MIDI Receive is handled by PdReceiverDelegate
+/// MIDI Receive is handled by PdMidiReceiverDelegate
 // Arrays
 // Size for array
 -(int)arraySizeForArrayNamed:(NSString *)arrayName;
